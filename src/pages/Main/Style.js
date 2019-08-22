@@ -33,12 +33,12 @@ export const Form = Styled.form`
 
 `;
 
-const animate = keyframes`
-  from: {
+const rotate = keyframes`
+  0%: {
     transform: rotate(0deg);
   }
 
-  to: {
+  100%: {
     transform: rotate(360deg);
   }
 `;
@@ -62,14 +62,32 @@ export const SubmitButton = Styled.button.attrs(props => ({
     cursor: not-allowed;
   }
 
+  ${props =>
+    props.loading &&
+    css`
+      svg {
+        animation: ${rotate} 2s linear infinite;
+      }
+    `}
+`;
 
+export const List = Styled.ul`
+  list-style: none;
+  margin-top: 30px;
 
-   ${props => {
-     props.loading &&
-       css`
-         svg {
-           animation: ${animate} linear infinite 2s;
-         }
-       `;
-   }}
+  & + li {
+    border-top: 1px solid #eeee;
+  }
+
+  li {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+  }
+
+  a {
+    color: #7159c1;
+    text-decoration: none;
+  }
 `;

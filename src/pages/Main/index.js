@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { FaGithub, FaPlus, FaSpinner } from 'react-icons/fa';
-import { Container, SubmitButton, Form } from './Style';
+import { Container, SubmitButton, Form, List } from './Style';
 import api from '../../services/api';
 
 export default class Main extends Component {
   state = {
     newRepo: '',
-    repos: [],
+    repositories: [],
     loading: false,
   };
 
@@ -21,11 +21,12 @@ export default class Main extends Component {
       const { data: full_info } = await api.get(`/repos/${this.state.newRepo}`);
 
       const data = {
-        fullname: full_info.full_name,
+        id: full_info.id,
+        name: full_info.full_name,
       };
 
       this.setState({
-        repos: [...this.state.repos, data],
+        repositories: [...this.state.repositories, data],
         newRepo: '',
         loading: false,
       });
@@ -37,7 +38,7 @@ export default class Main extends Component {
   };
 
   render() {
-    const { newRepo, loading } = this.state;
+    const { newRepo, loading, repositories } = this.state;
 
     return (
       <Container>
@@ -52,7 +53,8 @@ export default class Main extends Component {
             value={newRepo}
             placeholder="Adicionar repositório"
           />
-          <SubmitButton loading={loading}>
+
+          <SubmitButton loading={loading ? 1 : 0}>
             {loading ? (
               <FaSpinner color="#FFF" size={16}></FaSpinner>
             ) : (
@@ -60,6 +62,15 @@ export default class Main extends Component {
             )}
           </SubmitButton>
         </Form>
+
+        <List>
+          {repositories.map(repository => (
+            <li key={repository.id}>
+              <span>{repository.name}</span>
+              <a href="">Detalhes</a>
+            </li>
+          ))}
+        </List>
       </Container>
     );
   }
