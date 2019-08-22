@@ -75,15 +75,17 @@ export const List = Styled.ul`
   list-style: none;
   margin-top: 30px;
 
-  & + li {
-    border-top: 1px solid #eeee;
-  }
+
 
   li {
     display:flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 0;
+
+    & + li {
+      border-top: 1px solid #eeee;
+    }
   }
 
   a {

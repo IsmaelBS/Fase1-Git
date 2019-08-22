@@ -11,7 +11,11 @@ export default function routes() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Main}></Route>
-        <Route exact path="/repository" component={Repository}></Route>
+        <Route
+          exact
+          path="/repository/:repository"
+          component={Repository}
+        ></Route>
       </Switch>
     </BrowserRouter>
   );
