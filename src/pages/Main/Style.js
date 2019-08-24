@@ -12,6 +12,10 @@ export const Form = Styled.form`
     border-radius: 4px;
   }
 
+  .error {
+    border: 1px solid red;
+  }
+
 `;
 
 const rotate = keyframes`
